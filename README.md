@@ -65,6 +65,7 @@ classDiagram
 | [matching_service.py](./matching_service.py) | Implementação do *3-Way Matching*, *Circuit Breaker* de lotes reimpressos (> 0,5% de erro) e *Sanity Check* estatístico da TRI inter-dias. |
 | [database_repository.py](./database_repository.py) | Camada de persistência em SQLite em memória com `CHECK constraints` e `BEFORE INSERT TRIGGER` bloqueando notas inconsistentes. |
 | [test_matching_enem.py](./test_matching_enem.py) | Suíte automatizada com **10 cenários de teste** (6 Testes de Unidade com `MagicMock` + 4 Testes de Integração com Banco de Dados). |
+| [demo_apresentacao.py](./demo_apresentacao.py) | Script visual para demonstração em sala (simula no terminal o *3-Way Matching*, o bloqueio do Bug de 2019, o *Circuit Breaker* e a *Trigger* do banco). |
 
 ---
 
@@ -86,10 +87,22 @@ classDiagram
 
 ---
 
-## 4. Como Executar os Testes
+## 4. Como Executar os Testes e a Demonstração em Sala
 
-No terminal, execute:
+### A. Suíte Completa de Testes Automatizados (Unitários + Banco de Dados)
+No terminal (dentro desta pasta), execute:
 
 ```bash
-python3 -m unittest discover -s artefato_enem -p "test_*.py" -v
+python3 -m unittest discover -s . -p "test_*.py" -v
+```
+
+### B. Roteiro Visual de Demonstração (`demo_apresentacao.py`)
+Para exibir no terminal o passo a passo colorido de cada barreira de proteção atuando sobre os dados:
+
+```bash
+# Execução contínua de todos os cenários
+python3 demo_apresentacao.py
+
+# Modo interativo (pausa a cada cenário aguardando ENTER — ideal durante a fala)
+python3 demo_apresentacao.py --pausa
 ```
